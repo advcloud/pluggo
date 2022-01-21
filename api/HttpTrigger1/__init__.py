@@ -11,7 +11,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
     sqlConnectionString = os.environ["SQLCONNSTR_SQLConnectionString"]
-    turkeySize = ''
+    #turkeySize = ''
     messages = []
     statusCode = 200
     ingredients = []	
@@ -50,10 +50,11 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         return generateHttpResponse(avaiotdata, messages, 400)			
     try:	
         plugdata = getIngredients1(sqlConnection, turkeyS1)
-        logging.info('plugdata: %s', plugdata)	
-        for item in plugdata:
-            p2 = item['Plug'] 
-            p3 = item['Plug_R']			
+        logging.info('plugdata: %s', plugdata)
+        p2 = plugdata[2] 
+        p3 = plugdata[3] 
+        p10 = plugdata[0] 	
+	
         logging.info('plugdata1: %s', p2) 
         logging.info('plugdata2: %s', p3)		
     except:
@@ -81,8 +82,8 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         date1 = 'test123'
         p8 = p2 +'or'+p3
         p9 = p1 +'_'+p4
-        logging.info('plugrecord: %s', date1)   
-        getIngredients3(sqlConnection, p, turkeyS, turkeyS1, p8, p5, p7, p9)		
+        logging.info('plugrecord1: %s', date1)   
+        getIngredients3(sqlConnection, p, turkeyS, p10, p8, p5, p7, p9)		
         plugrecord = getIngredients2(sqlConnection)		
     except:
         messages.append('plugrecord error.')
@@ -117,12 +118,16 @@ def getSqlConnection(sqlConnectionString):
         else:
             return sqlConnection
 
-def getIngredients1(sqlConnection, turkeySize):
-    logging.info('getting plugname1')
+def getIngredients1(sqlConnection, turkeyS1):
+    turkeyS2 = str(turkeyS1)
+
     results = []
     sqlCursor = sqlConnection.cursor()
-    sqlCursor.execute('EXEC plugname1 '+turkeySize)
-    results = json.loads(sqlCursor.fetchone()[0])
+    sql =  "SELECT * FROM cablels WHERE Item_Number =  " +"'"+turkeyS1+"'"
+    logging.info('getting plugname1: %s',sql)   
+    sqlCursor.execute(sql)
+    results = sqlCursor.fetchone()
+    logging.info('getting plugname2: %s',results)    
     sqlCursor.commit()
     sqlCursor.close()
     return results	
@@ -139,7 +144,7 @@ def getIngredients3(sqlConnection, turkey1, turkey2, turkey3, turkey4, turkey5, 
     logging.info('getting plugrecord4')
 
     sqlCursor = sqlConnection.cursor()
-    go1 = "EXEC plugrecord4 "+str(turkey1)+" , "+turkey2+" , "+turkey3+" ,"+"'"+turkey4+"'"+" ,"+"'"+turkey5+"'"+" , "+"'"+turkey6+"'"+" , "+"'"+turkey7+"'"
+    go1 = "EXEC plugrecord4 "+str(turkey1)+" , "+"'"+turkey2+"'"+" , "+"'"+turkey3+"'"+" ,"+"'"+turkey4+"'"+" ,"+"'"+turkey5+"'"+" , "+"'"+turkey6+"'"+" , "+"'"+turkey7+"'"
     logging.info('plugrecord: %s', go1) 
     sqlCursor.execute(go1)
     sqlCursor.commit()

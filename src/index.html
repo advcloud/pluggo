@@ -93,14 +93,14 @@
         })
         .then(json =>  {
             console.log(json);
-            document.querySelector("#message1").innerHTML = json['plugdata']['name'];
-            document.querySelector("#message2").innerHTML = json['plugdata']['pluginput'];
-            document.querySelector("#message3").innerHTML = json['plugdata']['plugname'];
-            document.querySelector("#message4").innerHTML = json['plugdata']['plugclass'];
-            document.querySelector("#message5").innerHTML = json['plugdata']['plugtest'];
-            document.querySelector("#message6").innerHTML = json['plugdata']['plugmemo'];
-            document.querySelector("#message7").innerHTML = json['plugdata']['Created_On'];
-            document.querySelector("#message8").innerHTML = json['plugdata']['sn'];	
+            document.querySelector("#message1").innerHTML = json['plugdata'][0]['name'];
+            document.querySelector("#message2").innerHTML = json['plugdata'][0]['pluginput'];
+            document.querySelector("#message3").innerHTML = json['plugdata'][0]['plugname'];
+            document.querySelector("#message4").innerHTML = json['plugdata'][0]['plugclass'];
+            document.querySelector("#message5").innerHTML = json['plugdata'][0]['plugtest'];
+            document.querySelector("#message6").innerHTML = json['plugdata'][0]['plugmemo'];
+            document.querySelector("#message7").innerHTML = json['plugdata'][0]['Created_On'];
+            document.querySelector("#message8").innerHTML = json['plugdata'][0]['sn'];	
             document.querySelector("#message9").innerHTML = json['Messages'];				
         })
 
