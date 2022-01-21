@@ -10,7 +10,7 @@ import azure.functions as func
 def main(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Python HTTP trigger function processed a request.')
 
-    sqlConnectionString = os.environ["SQLCONNSTR_SQLConnectionString"]
+    sqlConnectionString = os.environ["SQLConnectionString"]
     #turkeySize = ''
     messages = []
     statusCode = 200
