@@ -27,6 +27,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         turkeyS = my_json['name']
         logging.info(turkeyS)
         turkeyS1 = my_json['plug']
+        turkeyS1 = '565-50-0015-30'
         logging.info(turkeyS1)		
     except:
         messages.append('Use the query string "turkey" to send a turkey .')
