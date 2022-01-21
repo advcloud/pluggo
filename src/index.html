@@ -78,7 +78,7 @@
         });
     
         // Post the payload to the contact endpoint.
-        fetch("http://localhost:7071/api/HttpTrigger1", {
+        fetch("https://salmon-water-0783b441e.1.azurestaticapps.net/api/HttpTrigger1", {
             method: 'post',
             body: JSON.stringify(payload)
         }).then(resp => {
