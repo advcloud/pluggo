@@ -1,17 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
+    <title>Plugtest</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>Plug TEST App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="test.min.css">
+    <link rel="stylesheet" href="report.css">
+
+    <script src="Chart.min.js"></script>
 </head>
 
 <body>
-    <main>
-    <h1>Plug TEST</h1>
-<h2>Contact Form</h2>
+
+    <div class="main_content">
+        <header class="text-center">
+            <h1><a href="/"> Plug TEST</h1></a>
+        </header>
+        <div class="total_info text-center">		
+<h2>Input Test</h2>
 
 <form id="contact-form">
     Name<br>
@@ -23,9 +31,22 @@
     <br><br>
     <button type="submit">Submit</button>
 </form>
-
+        </div>
 <div id="success-message" style="display: none">
-    <h3>Message Sent!</h3>
+        <div class="total_info text-center">
+		
+            <div class="charts">
+                <canvas id="myChart" width="175" height="175"></canvas>
+            </div>
+    
+            <span>Test Cases: <b id="message8">...</b> </span>
+
+        </div>
+    
+        <div class="container-fluid">
+            <div class="col-sm-4 float-left">
+                <div class="Tests">
+                    <h4 class="text-center">Test Cases</h4>
     <p>
         Name:
         <b id="message1">...</b>
@@ -34,6 +55,10 @@
         pluginput:
         <b id="message2">...</b>
     </p> 
+                </div>
+            </div>
+            <div class="col-sm-8 float-right testSteps">
+                <h4 class="text-center">Cases Steps</h4>
     <p>
         plugname:
         <b id="message3">...</b>
@@ -54,20 +79,55 @@
         Created_On:
         <b id="message7">...</b>
     </p>
-    <p>
-        sn:
-        <b id="message8">...</b>
-    </p>  		
-    <p>
-        other:
-        <b id="message9">...</b>
-    </p>  		
+            </div>
+        </div>
+    </div>
 </div>
 
+    <footer>
+        <div class="footer-container container-fluid">
+            <div class="footer-links text-center">
+                footerContent
+            </div>
+            <div class="my-contents">
+                <p>Report generated using <a href="http://claireye.com.tw" target="_blank"><u><b>Claireye</b></u></a></p>
+            </div>
+        </div>
+    </footer>
+	    <script>
+		var tx = 50;
+		var ty = 50;
+		        </script>
+		
+    <script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pass', 'Fail'],
+                datasets: [{
+                    data: [tx, ty],
+                    backgroundColor: [
+                        'rgba(0, 128, 0, 1)',
+                        'rgba(255, 0, 0, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 128, 0, 0.8)',
+                        'rgba(255, 0, 0, 0.8)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+            }
+        });
+        </script>
 <script>
     var contactForm = document.getElementById("contact-form");
     var successMessage = document.getElementById("success-message");
-    
+      
     contactForm.onsubmit = function(event) {
         event.preventDefault(); // Don't let the browser submit the form.
         var payload = {};
@@ -82,12 +142,15 @@
             method: 'post',
             body: JSON.stringify(payload)
         }).then(resp => {
+            successMessage.style.display = "none";
+            faultMessage.style.display = "none";
             if (!resp.ok) {
                 console.error(resp);
                 return;
             }
             // Display success message.
-            successMessage.style.display = "block";
+		var tx = 100;
+		var ty = 0;
             console.log(resp);
             return resp.json(); 
         })
@@ -100,8 +163,9 @@
             document.querySelector("#message5").innerHTML = json['plugdata'][0]['plugtest'];
             document.querySelector("#message6").innerHTML = json['plugdata'][0]['plugmemo'];
             document.querySelector("#message7").innerHTML = json['plugdata'][0]['Created_On'];
-            document.querySelector("#message8").innerHTML = json['plugdata'][0]['sn'];	
-            document.querySelector("#message9").innerHTML = json['Messages'];				
+            document.querySelector("#message8").innerHTML = json['plugdata'][0]['sn'];
+            if (json['plugdata'][0]['plugtest'] == 'fault') {		var tx = 0;var ty = 100;	}
+			
         })
 
         ;
