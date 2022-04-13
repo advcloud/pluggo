@@ -136,14 +136,6 @@
             document.querySelector("#message7").innerHTML = json['plugdata'][0]['Created_On'];
             document.querySelector("#message8").innerHTML = json['plugdata'][0]['sn'];
             if (json['plugdata'][0]['plugtest'] == 'fault') {		tx = 0;ty = 100;	}
-			
-        })
-
-        ;
-    }
-</script>    
-
-    <script>
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
             type: 'doughnut',
@@ -166,8 +158,13 @@
                 responsive: true,
                 maintainAspectRatio: true,
             }
-        });
-        </script>
+        });			
+        })
+
+        ;
+    }
+</script>    
+
 
 
 </body>
