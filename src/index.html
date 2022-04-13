@@ -143,7 +143,6 @@
             body: JSON.stringify(payload)
         }).then(resp => {
             successMessage.style.display = "none";
-            faultMessage.style.display = "none";
             if (!resp.ok) {
                 console.error(resp);
                 return;
