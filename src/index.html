@@ -94,36 +94,7 @@
             </div>
         </div>
     </footer>
-	    <script>
-		var tx = 50;
-		var ty = 50;
-		        </script>
-		
-    <script>
-        var ctx = document.getElementById('myChart');
-        var myChart = new Chart(ctx, {
-            type: 'doughnut',
-            data: {
-                labels: ['Pass', 'Fail'],
-                datasets: [{
-                    data: [tx, ty],
-                    backgroundColor: [
-                        'rgba(0, 128, 0, 1)',
-                        'rgba(255, 0, 0, 1)'
-                    ],
-                    borderColor: [
-                        'rgba(0, 128, 0, 0.8)',
-                        'rgba(255, 0, 0, 0.8)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: true,
-            }
-        });
-        </script>
+
 <script>
     var contactForm = document.getElementById("contact-form");
     var successMessage = document.getElementById("success-message");
@@ -172,6 +143,31 @@
     }
 </script>    
 
+    <script>
+        var ctx = document.getElementById('myChart');
+        var myChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Pass', 'Fail'],
+                datasets: [{
+                    data: [tx, ty],
+                    backgroundColor: [
+                        'rgba(0, 128, 0, 1)',
+                        'rgba(255, 0, 0, 1)'
+                    ],
+                    borderColor: [
+                        'rgba(0, 128, 0, 0.8)',
+                        'rgba(255, 0, 0, 0.8)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+            }
+        });
+        </script>
 
 
 </body>
