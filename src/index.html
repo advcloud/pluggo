@@ -102,7 +102,7 @@
 	var ty = 0;      
     contactForm.onsubmit = function(event) {
         event.preventDefault(); // Don't let the browser submit the form.
-	    document.getElementById('button2').disabled=false;
+	    document.getElementById('button2').disabled=true;
         var payload = {};
     
         // Build JSON key-value pairs using the form fields.
@@ -122,7 +122,7 @@
             }
             // Display success message.
             successMessage.style.display = "block";	
-		document.getElementById('button2').disabled=true;
+		document.getElementById('button2').disabled=false;
 
             console.log(resp);
             return resp.json(); 
