@@ -29,7 +29,7 @@
     <input type="text" name="plug" required>
     <br>
     <br><br>
-    <button type="submit">Submit</button>
+    <button  id="button2" type="submit">Submit</button>
 </form>
         </div>
 <div id="success-message" style="display: none">
@@ -102,6 +102,7 @@
 	var ty = 0;      
     contactForm.onsubmit = function(event) {
         event.preventDefault(); // Don't let the browser submit the form.
+	    document.getElementById('button2').disabled=false;
         var payload = {};
     
         // Build JSON key-value pairs using the form fields.
@@ -120,7 +121,8 @@
                 return;
             }
             // Display success message.
-            successMessage.style.display = "block";		
+            successMessage.style.display = "block";	
+		document.getElementById('button2').disabled=true;
 
             console.log(resp);
             return resp.json(); 
