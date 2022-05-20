@@ -139,6 +139,12 @@
 		gmessage500.style.display = "none";		
             if (!resp.ok) {
                 console.error(resp);
+                switch (resp.status) {
+			case 400:
+				 gmessage400.style.display = "block";
+			case 500:
+				 gmessage500.style.display = "block";
+				 }		    
                 return;
             }
             // Display success message.
@@ -212,6 +218,7 @@
 				 gmessage400.style.display = "block";
 			case 500:
 				 gmessage500.style.display = "block";
+				 }
                 return;
             }
             // Display success message.
