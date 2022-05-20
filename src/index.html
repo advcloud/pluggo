@@ -41,6 +41,13 @@
     <button  id="button2" type="submit">Submit</button>
 </form>
         </div>
+<div id="message400" style="display: none">
+    <h2>Data Not Found!</h2>
+</div>
+<div id="message500" style="display: none">
+    <h2>SQL server Dormant!</h2>
+</div>	    
+	    
 <div id="success-message" style="display: none">
         <div class="total_info text-center">
 		
@@ -107,7 +114,9 @@
 <script>
     var contactForm = document.getElementById("contact-form");
     var successMessage = document.getElementById("success-message");
-    var resetForm = document.getElementById("reset-form"); 
+    var resetForm = document.getElementById("reset-form");
+    var gmessage400 = document.getElementById("message400");
+    var gmessage500 = document.getElementById("message500");
 	var tx = 100;
 	var ty = 0;      
     contactForm.onsubmit = function(event) {
@@ -126,6 +135,8 @@
             body: JSON.stringify(payload)
         }).then(resp => {
             successMessage.style.display = "none";
+		gmessage400.style.display = "none";
+		gmessage500.style.display = "none";		
             if (!resp.ok) {
                 console.error(resp);
                 return;
@@ -191,9 +202,16 @@
             method: 'post',
             body: JSON.stringify(payload)
         }).then(resp => {
-
+            successMessage.style.display = "none";
+		gmessage400.style.display = "none";
+		gmessage500.style.display = "none";
             if (!resp.ok) {
                 console.error(resp);
+		 switch (resp.status) {
+			case 400:
+				 gmessage400.style.display = "block";
+			case 500:
+				 gmessage500.style.display = "block";
                 return;
             }
             // Display success message.
