@@ -42,7 +42,9 @@
 <div id="message500" style="display: none">
     <h2>SQL server Dormant!</h2>
 </div>	    
-	    
+<div id="message600" style="display: none">
+    <h2>refresh SN ok!</h2>
+</div>		    
 <div id="success-message" style="display: none">
         <div class="total_info text-center">
 		
@@ -131,7 +133,8 @@
         }).then(resp => {
             successMessage.style.display = "none";
 		gmessage400.style.display = "none";
-		gmessage500.style.display = "none";		
+		gmessage500.style.display = "none";
+		gmessage600.style.display = "none";		
             if (!resp.ok) {
                 console.error(resp);
                 switch (resp.status) {
@@ -209,6 +212,7 @@
             successMessage.style.display = "none";
 		gmessage400.style.display = "none";
 		gmessage500.style.display = "none";
+		gmessage600.style.display = "none";		
             if (!resp.ok) {
                 console.error(resp);
                 switch (resp.status) {
@@ -223,22 +227,14 @@
                 return;
             }
             // Display success message.
-            successMessage.style.display = "block";
+            gmessage600.style.display = "block";
             document.getElementById('button1').disabled=false;
             console.log(resp);
             return resp.json(); 
         })
         .then(json =>  {
             console.log(json);
-            document.querySelector("#message1").innerHTML = json['plugdata'][0]['name'];
-            document.querySelector("#message2").innerHTML = json['plugdata'][0]['pluginput'];
-            document.querySelector("#message3").innerHTML = json['plugdata'][0]['plugname'];
-            document.querySelector("#message4").innerHTML = json['plugdata'][0]['plugclass'];
-            document.querySelector("#message5").innerHTML = json['plugdata'][0]['plugtest'];
-            document.querySelector("#message6").innerHTML = json['plugdata'][0]['plugmemo'];
-            document.querySelector("#message7").innerHTML = json['plugdata'][0]['Created_On'];
-            document.querySelector("#message8").innerHTML = json['plugdata'][0]['sn'];
-			
+	
         })
 
         ;
