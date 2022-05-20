@@ -141,15 +141,18 @@
                 console.error(resp);
                 switch (resp.status) {
 			case 400:
-				 gmessage400.style.display = "block";
+				gmessage400.style.display = "block";
+				break
 			case 500:
-				 gmessage500.style.display = "block";
-				 }		    
+				gmessage500.style.display = "block";
+				break
+				 }
+                document.getElementById('button2').disabled=false;
                 return;
             }
             // Display success message.
             successMessage.style.display = "block";	
-		document.getElementById('button2').disabled=false;
+            document.getElementById('button2').disabled=false;
 
             console.log(resp);
             return resp.json(); 
@@ -195,7 +198,7 @@
       
     resetForm.onsubmit = function(event) {
         event.preventDefault(); // Don't let the browser submit the form.
-		document.getElementById('button1').disabled=false;
+		document.getElementById('button1').disabled=true;
         var payload = {};
     
         // Build JSON key-value pairs using the form fields.
@@ -213,17 +216,20 @@
 		gmessage500.style.display = "none";
             if (!resp.ok) {
                 console.error(resp);
-		 switch (resp.status) {
+                switch (resp.status) {
 			case 400:
-				 gmessage400.style.display = "block";
+				gmessage400.style.display = "block";
+				break
 			case 500:
-				 gmessage500.style.display = "block";
+				gmessage500.style.display = "block";
+				break
 				 }
+                document.getElementById('button1').disabled=false;
                 return;
             }
             // Display success message.
             successMessage.style.display = "block";
-			document.getElementById('button1').disabled=true;
+            document.getElementById('button1').disabled=false;
             console.log(resp);
             return resp.json(); 
         })
