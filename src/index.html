@@ -18,7 +18,22 @@
         <header class="text-center">
             <h1><a href="/"> Plug TEST</h1></a>
         </header>
-        <div class="total_info text-center">		
+        <div class="total_info text-center">
+<h2>RESET Form</h2>
+
+<form id="reset-form">
+    ID<br>
+    <input type="text" name="name" required>
+    <br>
+	Txet<br>
+    <input type="text" name="plug" required>
+    <br>
+    <br><br>
+    <button id="button1" type="submit">RESET</button>
+</form>
+
+	
+<h2>Contact Form</h2>		
 <h2>Input Test:jack;565-50-0015-30</h2>
 
 <form id="contact-form">
@@ -98,6 +113,7 @@
 <script>
     var contactForm = document.getElementById("contact-form");
     var successMessage = document.getElementById("success-message");
+	var resetForm = document.getElementById("reset-form"); 
 	var tx = 100;
 	var ty = 0;      
     contactForm.onsubmit = function(event) {
@@ -165,6 +181,48 @@
 
         ;
     }
+      
+    resetForm.onsubmit = function(event) {
+        event.preventDefault(); // Don't let the browser submit the form.
+		document.getElementById('button1').disabled=false;
+        var payload = {};
+    
+        // Build JSON key-value pairs using the form fields.
+        resetFormForm.querySelectorAll("input, textarea").forEach(field => {
+            payload[field.name] = field.value;
+        });
+    
+        // Post the payload to the contact endpoint.
+        fetch("/api/HttpTrigger1", {
+            method: 'post',
+            body: JSON.stringify(payload)
+        }).then(resp => {
+
+            if (!resp.ok) {
+                console.error(resp);
+                return;
+            }
+            // Display success message.
+            successMessage.style.display = "block";
+			document.getElementById('button1').disabled=true;
+            console.log(resp);
+            return resp.json(); 
+        })
+        .then(json =>  {
+            console.log(json);
+            document.querySelector("#message1").innerHTML = json['plugdata'][0]['name'];
+            document.querySelector("#message2").innerHTML = json['plugdata'][0]['pluginput'];
+            document.querySelector("#message3").innerHTML = json['plugdata'][0]['plugname'];
+            document.querySelector("#message4").innerHTML = json['plugdata'][0]['plugclass'];
+            document.querySelector("#message5").innerHTML = json['plugdata'][0]['plugtest'];
+            document.querySelector("#message6").innerHTML = json['plugdata'][0]['plugmemo'];
+            document.querySelector("#message7").innerHTML = json['plugdata'][0]['Created_On'];
+            document.querySelector("#message8").innerHTML = json['plugdata'][0]['sn'];
+			
+        })
+
+        ;
+    }		
 </script>    
 
 
