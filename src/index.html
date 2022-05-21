@@ -36,9 +36,12 @@
     <button  id="button2" type="submit">Submit</button>
 </form>
         </div>
-<div id="message400" style="display: none">
+<div id="message401" style="display: none">
     <h2>No such part number!</h2>
 </div>
+<div id="message400" style="display: none">
+    <h2>ERROR!</h2>
+</div>	    
 <div id="message500" style="display: none">
     <h2>SQL server Dormant!</h2>
 </div>	    
@@ -112,6 +115,7 @@
     var contactForm = document.getElementById("contact-form");
     var successMessage = document.getElementById("success-message");
     var resetForm = document.getElementById("reset-form");
+    var gmessage401 = document.getElementById("message401");	
     var gmessage400 = document.getElementById("message400");
     var gmessage500 = document.getElementById("message500");
     var gmessage600 = document.getElementById("message600");	
@@ -133,6 +137,7 @@
             body: JSON.stringify(payload)
         }).then(resp => {
             successMessage.style.display = "none";
+		gmessage401.style.display = "none";
 		gmessage400.style.display = "none";
 		gmessage500.style.display = "none";
 		gmessage600.style.display = "none";		
@@ -142,6 +147,9 @@
 			case 400:
 				gmessage400.style.display = "block";
 				break
+			case 401:
+				gmessage401.style.display = "block";
+				break				
 			case 500:
 				gmessage500.style.display = "block";
 				break
@@ -165,7 +173,7 @@
             document.querySelector("#message5").innerHTML = json['plugdata'][0]['plugtest'];
             document.querySelector("#message6").innerHTML = json['plugdata'][0]['plugmemo'];
             document.querySelector("#message7").innerHTML = json['plugdata'][0]['Created_On'];
-            document.querySelector("#message8").innerHTML = json['plugdata'][0]['sn'];
+            document.querySelector("#message8").innerHTML = json['plugdata'][0]['plugcount'];
             if (json['plugdata'][0]['plugtest'] == 'fault') {		tx = 0;ty = 100;	}
         var ctx = document.getElementById('myChart');
         var myChart = new Chart(ctx, {
@@ -211,6 +219,7 @@
             body: JSON.stringify(payload)
         }).then(resp => {
             successMessage.style.display = "none";
+		gmessage401.style.display = "none";
 		gmessage400.style.display = "none";
 		gmessage500.style.display = "none";
 		gmessage600.style.display = "none";		
